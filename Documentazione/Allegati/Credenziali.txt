@@ -1,0 +1,11 @@
+Wi-Fi:
+Name: CPT_Prova
+Pass: CPT_Prova_Network_Key
+
+A.P. Credenziali:
+Username: admin
+Pass: CPT_Prova
+
+Proxy Server:
+Username: administrator
+Pass: Password&1
