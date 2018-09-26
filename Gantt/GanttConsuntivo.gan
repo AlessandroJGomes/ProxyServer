@@ -40,13 +40,13 @@
             <task id="15" name="analisi dei requisiti" color="#8cb6ce" meeting="false" start="2018-09-04" duration="2" complete="0" expand="true"/>
             <task id="13" name="analisi costi" color="#8cb6ce" meeting="false" start="2018-09-11" duration="1" complete="0" expand="true"/>
         </task>
-        <task id="20" name="Progettazione" meeting="false" start="2018-09-04" duration="9" complete="0" expand="false">
+        <task id="20" name="Progettazione" meeting="false" start="2018-09-04" duration="8" complete="0" expand="false">
             <task id="160" name="Studio funzionamento server proxy" meeting="false" start="2018-09-04" duration="1" complete="0" expand="true"/>
             <task id="220" name="Studio funzionamento ACL" meeting="false" start="2018-09-04" duration="2" complete="0" expand="true"/>
             <task id="89" name="Gantt" color="#8cb6ce" meeting="false" start="2018-09-04" duration="2" complete="0" expand="true"/>
-            <task id="223" name="Design pagina web principale" color="#8cb6ce" meeting="false" start="2018-09-25" duration="3" complete="0" expand="true"/>
+            <task id="223" name="Design pagina web principale" color="#8cb6ce" meeting="false" start="2018-09-26" duration="1" complete="0" expand="true"/>
             <task id="222" name="Design pagina dei log" color="#8cb6ce" meeting="false" start="2018-09-26" duration="1" complete="0" expand="true"/>
-            <task id="184" name="Design schema di rete" color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
+            <task id="184" name="Design schema di rete" color="#8cb6ce" meeting="false" start="2018-09-18" duration="1" complete="0" expand="true"/>
         </task>
         <task id="80" name="Implementazione" meeting="false" start="2018-09-05" duration="28" complete="0" expand="true">
             <task id="225" name="Montaggio schede di rete su server" meeting="false" start="2018-09-05" duration="1" complete="0" expand="true"/>
@@ -56,7 +56,7 @@
             <task id="232" name="Attivazione servizio DHCP sul proxy server" color="#8cb6ce" meeting="false" start="2018-09-11" duration="2" complete="0" expand="true"/>
             <task id="230" name="Collegamento tramite Access Point" color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
             <task id="241" name="Rimozione servizio DHCP dell'A.P." color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
-            <task id="234" name="Installazione MySQL sul server proxy" meeting="false" start="2018-09-19" duration="1" complete="0" expand="true"/>
+            <task id="234" name="Installazione MySQL sul server proxy" color="#8cb6ce" meeting="false" start="2018-09-18" duration="1" complete="0" expand="true"/>
             <task id="235" name="Creazione database all'interno del proxy server" meeting="false" start="2018-09-18" duration="3" complete="0" expand="true">
                 <task id="236" name="Tabella gruppi delle classi" color="#8cb6ce" meeting="false" start="2018-09-18" duration="3" complete="0" expand="true"/>
                 <task id="237" name="Tabella studenti delle classi" color="#8cb6ce" meeting="false" start="2018-09-18" duration="3" complete="0" expand="true"/>
@@ -75,8 +75,8 @@
         </task>
         <task id="88" name="Test" meeting="false" start="2018-09-05" duration="28" complete="0" expand="true">
             <task id="267" name="Test funzionamento server proxy" color="#8cb6ce" meeting="false" start="2018-09-05" duration="2" complete="0" expand="true"/>
+            <task id="271" name="Test funzionamento servizio DHCP" color="#8cb6ce" meeting="false" start="2018-09-11" duration="4" complete="0" expand="true"/>
             <task id="269" name="Test funzionamento Access Point" color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
-            <task id="271" name="Test funzionamento servizio DHCP" color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
             <task id="273" name="Test funzionamento servizio MySQL" color="#8cb6ce" meeting="false" start="2018-09-18" duration="1" complete="0" expand="true"/>
             <task id="272" name="Test collegamento ad internet tramite proxy server" meeting="false" start="2018-09-18" duration="3" complete="0" expand="true"/>
             <task id="274" name="Test database dei gruppi e degli studenti" meeting="false" start="2018-09-18" duration="3" complete="0" expand="true"/>

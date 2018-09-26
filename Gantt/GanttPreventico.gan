@@ -33,14 +33,14 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="Analisi" meeting="false" start="2018-09-04" duration="3" complete="0" expand="true">
+        <task id="0" name="Analisi" meeting="false" start="2018-09-04" duration="3" complete="0" expand="false">
             <task id="9" name="intervista cliente" color="#8cb6ce" meeting="false" start="2018-09-04" duration="1" complete="0" expand="true"/>
             <task id="216" name="risoluzione dei dubbi" color="#8cb6ce" meeting="false" start="2018-09-04" duration="1" complete="0" expand="true"/>
             <task id="218" name="analisi del dominio" color="#8cb6ce" meeting="false" start="2018-09-04" duration="1" complete="0" expand="true"/>
             <task id="15" name="analisi dei requisiti" color="#8cb6ce" meeting="false" start="2018-09-04" duration="2" complete="0" expand="true"/>
             <task id="13" name="analisi costi" color="#8cb6ce" meeting="false" start="2018-09-11" duration="1" complete="0" expand="true"/>
         </task>
-        <task id="20" name="Progettazione" meeting="false" start="2018-09-04" duration="6" complete="0" expand="true">
+        <task id="20" name="Progettazione" meeting="false" start="2018-09-04" duration="6" complete="0" expand="false">
             <task id="160" name="Studio funzionamento server proxy" meeting="false" start="2018-09-04" duration="1" complete="0" expand="true"/>
             <task id="220" name="Studio funzionamento ACL" meeting="false" start="2018-09-04" duration="2" complete="0" expand="true"/>
             <task id="89" name="Gantt" color="#8cb6ce" meeting="false" start="2018-09-04" duration="2" complete="0" expand="true"/>
