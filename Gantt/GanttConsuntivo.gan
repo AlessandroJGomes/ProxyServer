@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><project name="GanttUfficiale" company="" webLink="http://" view-date="2018-09-03" view-index="0" gantt-divider-location="681" resource-divider-location="300" version="2.8.5" locale="it">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
-        <field id="tpd3" name="Nome" width="480" order="0"/>
-        <field id="tpd4" name="Data d'inizio" width="90" order="1"/>
-        <field id="tpd5" name="Data di fine" width="92" order="2"/>
+        <field id="tpd3" name="Nome" width="485" order="0"/>
+        <field id="tpd4" name="Data d'inizio" width="95" order="1"/>
+        <field id="tpd5" name="Data di fine" width="97" order="2"/>
     </view>
     <view id="resource-table">
         <field id="0" name="Nome" width="210" order="0"/>
@@ -48,7 +48,7 @@
             <task id="222" name="Design pagina dei log" color="#8cb6ce" meeting="false" start="2018-09-26" duration="1" complete="0" expand="true"/>
             <task id="184" name="Design schema di rete" color="#8cb6ce" meeting="false" start="2018-09-18" duration="1" complete="0" expand="true"/>
         </task>
-        <task id="80" name="Implementazione" meeting="false" start="2018-09-05" duration="28" complete="0" expand="true">
+        <task id="80" name="Implementazione" meeting="false" start="2018-09-05" duration="23" complete="0" expand="true">
             <task id="225" name="Montaggio schede di rete su server" meeting="false" start="2018-09-05" duration="1" complete="0" expand="true"/>
             <task id="228" name="Preparazione postazione (Server, A.P, ...)" meeting="false" start="2018-09-05" duration="1" complete="0" expand="true"/>
             <task id="227" name="Installazione Squid" color="#8cb6ce" meeting="false" start="2018-09-05" duration="2" complete="0" expand="true"/>
@@ -57,12 +57,12 @@
             <task id="230" name="Collegamento tramite Access Point" color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
             <task id="241" name="Rimozione servizio DHCP dell'A.P." color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
             <task id="234" name="Installazione MySQL sul server proxy" color="#8cb6ce" meeting="false" start="2018-09-18" duration="1" complete="0" expand="true"/>
-            <task id="235" name="Creazione database all'interno del proxy server" meeting="false" start="2018-09-18" duration="3" complete="0" expand="true">
-                <task id="236" name="Tabella gruppi delle classi" color="#8cb6ce" meeting="false" start="2018-09-18" duration="3" complete="0" expand="true"/>
-                <task id="237" name="Tabella studenti delle classi" color="#8cb6ce" meeting="false" start="2018-09-18" duration="3" complete="0" expand="true"/>
+            <task id="235" name="Creazione database all'interno del proxy server" meeting="false" start="2018-10-02" duration="1" complete="0" expand="false">
+                <task id="236" name="Tabella gruppi delle classi" color="#8cb6ce" meeting="false" start="2018-10-02" duration="1" complete="0" expand="true"/>
+                <task id="237" name="Tabella studenti delle classi" color="#8cb6ce" meeting="false" start="2018-10-02" duration="1" complete="0" expand="true"/>
             </task>
-            <task id="244" name="Pagina web gestione accessi" meeting="false" start="2018-09-25" duration="15" complete="0" expand="true">
-                <task id="245" name="Interfaccia grafica della pagina principale" color="#8cb6ce" meeting="false" start="2018-09-25" duration="2" complete="0" priority="2" expand="true"/>
+            <task id="244" name="Pagina web gestione accessi" meeting="false" start="2018-09-26" duration="14" complete="0" expand="true">
+                <task id="245" name="Interfaccia grafica della pagina principale" color="#8cb6ce" meeting="false" start="2018-10-02" duration="2" complete="0" priority="2" expand="true"/>
                 <task id="248" name="Comunicazione tra il sito e il server proxy (PHP)" color="#8cb6ce" meeting="false" start="2018-09-26" duration="9" complete="0" priority="4" expand="true"/>
                 <task id="249" name="Gestione delle white-list dei siti visitabili" color="#8cb6ce" meeting="false" start="2018-11-06" duration="3" complete="0" expand="true"/>
             </task>
@@ -71,7 +71,7 @@
                 <task id="256" name="Interfaccia grafica della pagina dei log" color="#8cb6ce" meeting="false" start="2018-11-13" duration="2" complete="0" priority="2" expand="true"/>
                 <task id="258" name="Lettura dei log dal proxy server e visualizzazione sul sito" color="#8cb6ce" meeting="false" start="2018-11-14" duration="3" complete="0" expand="true"/>
             </task>
-            <task id="292" name="Protezione A.P. tramite server radius o password" color="#8cb6ce" meeting="false" start="2018-11-27" duration="5" complete="0" expand="true"/>
+            <task id="292" name="Protezione A.P. tramite server radius o password" color="#8cb6ce" meeting="false" start="2018-10-02" duration="1" complete="0" expand="true"/>
         </task>
         <task id="88" name="Test" meeting="false" start="2018-09-05" duration="28" complete="0" expand="true">
             <task id="267" name="Test funzionamento server proxy" color="#8cb6ce" meeting="false" start="2018-09-05" duration="2" complete="0" expand="true"/>

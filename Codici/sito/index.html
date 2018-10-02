@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Progetto SAMT Controllo dell’accesso ad una rete WiFi tramite proxy Server I4AC 2018">
+    <meta name="author" content="Alessandro Gomes">
+    <link rel="icon" href="images/favicon.ico">
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-grid.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Optional JavaScript -->
+    <link href="bootstrap/js/bootstrap.bundle.js" rel="stylesheet">
+    <link href="bootstrap/js/bootstrap.bundle.min.js" rel="stylesheet">
+    <link href="bootstrap/js/bootstrap.js" rel="stylesheet">
+    <link href="bootstrap/js/bootstrap.min.js" rel="stylesheet">
+
+    <title>Gestione accessi</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <header class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Accessi <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="log.php">Log</a>
+            </li>
+          </ul>
+        </nav>
+        <h1>RETE - ACCESSO AD INTERNET PER CLASSI</h1>
+        <br>
+        <h2>Controllo accesso ad internet per allievi SAM / IN / I "Informatico"</h2>
+      </header>
+      <main role="main">
+      <div class="jumbotron">
+        <form class="form" action="data_recovery.php" method="post">
+          <label for="sel1">Anno scolastico:</label>
+          <select class="form-control" id="sel1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+          <label for="sel1">Classe:</label>
+          <select class="form-control" id="sel1">
+            <option>AA</option>
+            <option>AC</option>
+            <option>BB</option>
+            <option>BC</option>
+          </select>
+          <button name="checkButton" type="submit" class="btn btn-lg btn-success" disabled >Invio</button>
+        </form>
+      </div>
+
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+        </div>
+
+        <div class="col-lg-6">
+        </div>
+      </div>
+
+    </main>
+    </div>
+  </body>
+</html>
