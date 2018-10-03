@@ -44,13 +44,18 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
-  text-align: center;
-  border-bottom: .05rem solid #e5e5e5;
+  text-align: left;
+  border-bottom: .05rem solid #fff;
+  height: auto;
+  padding: 1rem;
+  border-radius: .5rem;
+
 }
-.jumbotron .btn {
+.jumbotron .btn .btn-lg .btn-success{
   padding: .75rem 1.5rem;
   font-size: 1.5rem;
 }
+
 
 /* Supporting marketing content */
 .marketing {
@@ -98,4 +103,17 @@ td{
 
 table{
   table-layout: fixed;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    padding: .2rem 3rem;
+    font-weight: bold;
+    font-size: 2rem;
+    border-radius: .5rem;
+    position: relative;
+    vertical-align: bottom;
+
+}
+.custom-control-label::before, .custom-file-label, .custom-select{
+  border-radius: .5rem;
 }
