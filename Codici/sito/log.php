@@ -27,10 +27,10 @@
         <nav>
           <ul class="nav nav-pills float-right">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Accessi</a>
+              <a class="nav-link" href="index.php">Accessi</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="log.html">Log <span class="sr-only">(current)</span></a>
+              <a class="nav-link active" href="log.php">Log <span class="sr-only">(current)</span></a>
             </li>
           </ul>
         </nav>

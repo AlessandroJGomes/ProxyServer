@@ -62,7 +62,7 @@
                 <task id="237" name="Tabella studenti delle classi" color="#8cb6ce" meeting="false" start="2018-10-02" duration="1" complete="0" expand="true"/>
             </task>
             <task id="244" name="Pagina web gestione accessi" meeting="false" start="2018-09-26" duration="14" complete="0" expand="true">
-                <task id="245" name="Interfaccia grafica della pagina principale" color="#8cb6ce" meeting="false" start="2018-10-02" duration="2" complete="0" priority="2" expand="true"/>
+                <task id="245" name="Interfaccia grafica della pagina principale" color="#8cb6ce" meeting="false" start="2018-10-02" duration="6" complete="0" priority="2" expand="true"/>
                 <task id="248" name="Comunicazione tra il sito e il server proxy (PHP)" color="#8cb6ce" meeting="false" start="2018-09-26" duration="9" complete="0" priority="4" expand="true"/>
                 <task id="249" name="Gestione delle white-list dei siti visitabili" color="#8cb6ce" meeting="false" start="2018-11-06" duration="3" complete="0" expand="true"/>
             </task>
@@ -76,11 +76,12 @@
         <task id="88" name="Test" meeting="false" start="2018-09-05" duration="28" complete="0" expand="true">
             <task id="267" name="Test funzionamento server proxy" color="#8cb6ce" meeting="false" start="2018-09-05" duration="2" complete="0" expand="true"/>
             <task id="271" name="Test funzionamento servizio DHCP" color="#8cb6ce" meeting="false" start="2018-09-11" duration="4" complete="0" expand="true"/>
-            <task id="269" name="Test funzionamento Access Point" color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
             <task id="273" name="Test funzionamento servizio MySQL" color="#8cb6ce" meeting="false" start="2018-09-18" duration="1" complete="0" expand="true"/>
-            <task id="272" name="Test collegamento ad internet tramite proxy server" meeting="false" start="2018-09-18" duration="3" complete="0" expand="true"/>
-            <task id="274" name="Test database dei gruppi e degli studenti" meeting="false" start="2018-09-18" duration="3" complete="0" expand="true"/>
-            <task id="275" name="Test pagina web gestioni accessi" meeting="false" start="2018-09-25" duration="15" complete="0" expand="true"/>
+            <task id="272" name="Test collegamento ad internet tramite proxy server" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true">
+                <task id="303" name="Test funzionamento Access Point" color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
+            </task>
+            <task id="274" name="Test database dei gruppi e degli studenti" color="#8cb6ce" meeting="false" start="2018-10-02" duration="1" complete="0" expand="true"/>
+            <task id="275" name="Test pagina web gestioni accessi" color="#8cb6ce" meeting="false" start="2018-10-02" duration="6" complete="0" expand="true"/>
             <task id="295" name="Test funzionamento liste ACL del server proxy" meeting="false" start="2018-09-26" duration="9" complete="0" expand="true"/>
             <task id="296" name="Test funzionamento pagina dei log" meeting="false" start="2018-11-13" duration="4" complete="0" expand="true"/>
             <task id="302" name="Test funzionamento protezione A.P" meeting="false" start="2018-11-27" duration="5" complete="0" expand="true"/>

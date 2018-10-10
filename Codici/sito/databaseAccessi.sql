@@ -18,3 +18,5 @@ Id_Classe varchar(2) NOT NULL,
 primary key(Nome, Cognome),
 FOREIGN KEY (Anno_Classe, Id_Classe) REFERENCES classi(Anno_Classe, Id_Classe) on delete cascade on update cascade
 );
+
+INSERT INTO alunni values ("Erik", "Stallieviere", false, false, 4, "AC");

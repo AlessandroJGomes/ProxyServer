@@ -32,6 +32,8 @@ body {
   border-top: .05rem solid #e5e5e5;
 }
 
+
+
 /* Customize container */
 @media (min-width: 50em) {
   .container {
@@ -116,4 +118,15 @@ table{
 }
 .custom-control-label::before, .custom-file-label, .custom-select{
   border-radius: .5rem;
+}
+
+.checkBlocked{
+  margin-left:25%;
+  height:1rem;
+  width:1rem;
+}
+
+.checked{
+  height:1rem;
+  width:1rem;
 }
