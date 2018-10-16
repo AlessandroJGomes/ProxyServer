@@ -1,9 +1,11 @@
 <?php
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+}
   /**
    *
    */
-  class gestion
+  /*class gestion
   {
 
     function __construct()
@@ -16,12 +18,12 @@
       //Eseguo la connessione al database
       require_once('db_connection.php');
       $conn = new connection();
-      $result = $conn->getClass($_POST["anno"], $_POST["id"]);
-      
+      $result = $conn->gestions($_POST["anno"], $_POST["id"]);
+
       print_r($result);
     }
   }
-}
+}*/
 
 
 

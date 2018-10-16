@@ -120,13 +120,60 @@ table{
   border-radius: .5rem;
 }
 
-.checkBlocked{
-  margin-left:25%;
+/**
+* Regole css per i checkbox select all nella tabella degli utenti bloccati.
+*/
+.checkedAllBlockedSeleziona{
   height:1rem;
   width:1rem;
 }
 
-.checked{
+.checkedAllBlockedYouTube{
   height:1rem;
   width:1rem;
+}
+
+/**
+* Regole css per i checkbox select single nella tabella degli utenti bloccati.
+*/
+.checkBlockedState{
+  height:1rem;
+  width:1rem;
+}
+
+.checkBlockedYouTube{
+  margin-left:38%;
+  height:1rem;
+  width:1rem;
+}
+
+/**
+* Regole css per i checkbox select all nella tabella degli utenti bloccati.
+*/
+.checkedAllSblockedSeleziona{
+  height:1rem;
+  width:1rem;
+}
+
+.checkedAllSblockedYouTube{
+  height:1rem;
+  width:1rem;
+}
+
+/**
+* Regole css per i checkbox select single nella tabella degli utenti bloccati.
+*/
+.checkSblockedState{
+  height:1rem;
+  width:1rem;
+}
+
+.checkSblockedYouTube{
+  margin-left:38%;
+  height:1rem;
+  width:1rem;
+}
+
+th.azione {
+    text-align: center;
 }
