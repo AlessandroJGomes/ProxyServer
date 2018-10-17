@@ -30,10 +30,13 @@
       <nav>
         <ul class="nav nav-pills float-right">
           <li class="nav-item">
-            <a class="nav-link active" href="index.html">Accessi <span class="sr-only">(current)</span></a>
+            <a class="nav-link active" href="index.php">Accessi <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="log.php">Log</a>
+            <a class="nav-link" href="php/White-List.php">White-List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="php/log.php">Log</a>
           </li>
         </ul>
       </nav>
@@ -107,7 +110,7 @@
                       <td><?php echo $result[$i]['Nome']; ?></td>
                       <td><?php echo $result[$i]['Cognome']; ?></td>
                       <td><?php echo "<img src='Media/red.png' width='15px' height='15px'/>" ?></td>
-                      <td><input type="checkbox" class="checkBlockedState" checked = "checked"></td>
+                      <td><input type="checkbox" class="checkBlockedState" name="allievo" value="<? $result[$i]['Nome']; $result[$i]['Cognome']?>" checked = "checked"></td>
                       <td>
                         <?php
                           //Tramite un'operatore ternario controllo se lo stato di YouTube é 0 o 1 (false o true),
@@ -116,7 +119,7 @@
                           "<img src='Media/red.png' style='margin-left:10px; height:1rem; width:1rem;'/>" : "<img src='Media/green.png' style='margin-left:10px; height:1rem; width:1rem;'/>"
                           );
                         ?>
-                        <input type="checkbox" class="checkBlockedYouTube">
+                        <input type="checkbox" class="checkBlockedYouTube" name="YoutTube" value="<? $result[$i]['Nome']; $result[$i]['Cognome']?>">
                       </td>
                       <td>
                         <?php echo $result[$i]['Anno_Classe'].$result[$i]['Id_Classe']; ?>
@@ -193,7 +196,7 @@
                     <td><?php echo $result[$i]['Nome']; ?></td>
                     <td><?php echo $result[$i]['Cognome']; ?></td>
                     <td><?php echo "<img src='Media/green.png' width='15px' height='15px'/>" ?></td>
-                    <td><input type="checkbox" class="checkSblockedState"></td>
+                    <td><input type="checkbox" class="checkSblockedState" name="allievo" value="<? $result[$i]['Nome']; $result[$i]['Cognome']?>"></td>
                     <td>
                       <?php
                       //Tramite un'operatore ternario controllo se lo stato di YouTube é 0 o 1 (false o true),
@@ -201,7 +204,7 @@
                       echo ($result[$i]['Youtube'] == 1 ?
                       "<img src='Media/green.png' style='margin-left:10px; height:1rem; width:1rem;'/>" : "<img src='Media/red.png' style='margin-left:10px; height:1rem; width:1rem;'/>");
                       ?>
-                      <input type="checkbox" class="checkSblockedYouTube">
+                      <input type="checkbox" class="checkSblockedYouTube" name="YouTube" value="<? $result[$i]['Nome']; $result[$i]['Cognome']?>">
                     </td>
                     <td><?php echo $result[$i]['Anno_Classe'].$result[$i]['Id_Classe']; ?></td>
                   </tr>
