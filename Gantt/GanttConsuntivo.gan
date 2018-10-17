@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><project name="GanttUfficiale" company="" webLink="http://" view-date="2018-09-03" view-index="0" gantt-divider-location="681" resource-divider-location="300" version="2.8.5" locale="it">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
-        <field id="tpd3" name="Nome" width="485" order="0"/>
-        <field id="tpd4" name="Data d'inizio" width="95" order="1"/>
-        <field id="tpd5" name="Data di fine" width="97" order="2"/>
+        <field id="tpd3" name="Nome" width="474" order="0"/>
+        <field id="tpd4" name="Data d'inizio" width="93" order="1"/>
+        <field id="tpd5" name="Data di fine" width="95" order="2"/>
     </view>
     <view id="resource-table">
         <field id="0" name="Nome" width="210" order="0"/>
@@ -57,7 +57,7 @@
             <task id="230" name="Collegamento tramite Access Point" color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
             <task id="241" name="Rimozione servizio DHCP dell'A.P." color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
             <task id="234" name="Installazione MySQL sul server proxy" color="#8cb6ce" meeting="false" start="2018-09-18" duration="1" complete="0" expand="true"/>
-            <task id="235" name="Creazione database all'interno del proxy server" meeting="false" start="2018-10-02" duration="1" complete="0" expand="false">
+            <task id="235" name="Creazione database all'interno del proxy server" meeting="false" start="2018-10-02" duration="1" complete="0" expand="true">
                 <task id="236" name="Tabella gruppi delle classi" color="#8cb6ce" meeting="false" start="2018-10-02" duration="1" complete="0" expand="true"/>
                 <task id="237" name="Tabella studenti delle classi" color="#8cb6ce" meeting="false" start="2018-10-02" duration="1" complete="0" expand="true"/>
             </task>
@@ -75,11 +75,10 @@
         </task>
         <task id="88" name="Test" meeting="false" start="2018-09-05" duration="28" complete="0" expand="true">
             <task id="267" name="Test funzionamento server proxy" color="#8cb6ce" meeting="false" start="2018-09-05" duration="2" complete="0" expand="true"/>
+            <task id="303" name="Test funzionamento Access Point" color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
             <task id="271" name="Test funzionamento servizio DHCP" color="#8cb6ce" meeting="false" start="2018-09-11" duration="4" complete="0" expand="true"/>
             <task id="273" name="Test funzionamento servizio MySQL" color="#8cb6ce" meeting="false" start="2018-09-18" duration="1" complete="0" expand="true"/>
-            <task id="272" name="Test collegamento ad internet tramite proxy server" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true">
-                <task id="303" name="Test funzionamento Access Point" color="#8cb6ce" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
-            </task>
+            <task id="272" name="Test collegamento ad internet tramite proxy server" meeting="false" start="2018-09-18" duration="2" complete="0" expand="true"/>
             <task id="274" name="Test database dei gruppi e degli studenti" color="#8cb6ce" meeting="false" start="2018-10-02" duration="1" complete="0" expand="true"/>
             <task id="275" name="Test pagina web gestioni accessi" color="#8cb6ce" meeting="false" start="2018-10-02" duration="6" complete="0" expand="true"/>
             <task id="295" name="Test funzionamento liste ACL del server proxy" meeting="false" start="2018-09-26" duration="9" complete="0" expand="true"/>
