@@ -1,43 +1,3 @@
-<?php
-$blockedResult = null;
-$unBlockedResult = null;
-$change = null;
-//Eseguo il require dei file esterni necessari.
-require_once('php/db_connection.php');
-require_once('php/data_change.php');
-//Creao gli oggetti delle classi necessarie;
-$conn = new connection();
-$gestions = new gestions();
-//Controllo se é stato eseguito il POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  //Eseguo il controllo su quale bottone submit viene premuto, in base ai dati con cui l'amministratore lavora.
-  if (isset($_POST["anno"]) && isset($_POST["id"])){
-    //Richiamo la funzione desiderata passandogli i parametri che necessita.
-    $blockedResult = $conn->getClassBlocked($_POST["anno"], $_POST["id"]);
-    $unBlockedResult = $conn->getClassUnblocked($_POST["anno"], $_POST["id"]);
-  }
-  if (isset($_POST["start"]) && isset($_POST["end"])) {
-    if (isset($_POST["studentBlocked"])) {
-        $change = $gestions->getCheckboxState($_POST["studentBlocked"]);
-    }
-    if (isset($_POST["YouTubeBlocked"])) {
-        $change = $gestions->getCheckboxYouTube($_POST["YouTubeBlocked"]);
-    }
-    /**var_dump($_POST["studentBlocked"]);
-    echo "<br>";
-    var_dump($_POST["YouTubeBlocked"]);*/
-  }
-  else {
-    if (isset($_POST["studentBlocked"])) {
-        $change = $gestions->getCheckboxState($_POST["studentBlocked"]);
-    }
-    if (isset($_POST["YouTubeBlocked"])) {
-        $change = $gestions->getCheckboxYouTube($_POST["YouTubeBlocked"]);
-    }
-  }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,10 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- Custom script for this template
   <link href="js/script.js" rel="stylesheet">-->
 
-<title>Gestione accessi</title>
-
+  <title>Gestione accessi</title>
 </head>
-<body onload="getData()">
+<body>
   <div class="container">
     <header class="header clearfix">
       <nav>
@@ -91,8 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="row">
             <div class="col-md-4 mb-3">
               <label for="anno">Anno scolastico</label>
-              <select class="custom-select d-block w-100" name="anno" id="year" required>
-                <option value="0">Choose...</option>
+              <select class="custom-select d-block w-100" name="anno" required>
+                <option value="">Choose...</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -101,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="col-md-4 mb-3">
               <label for="state">Classe</label>
-              <select class="custom-select d-block w-100" name="id" id="id" required>
+              <select class="custom-select d-block w-100" name="id" required>
                 <option value="">Choose...</option>
                 <option value="AA">AA</option>
                 <option value="AC">AC</option>
@@ -110,9 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </select>
             </div>
             <div class="col-md-4 mb-3">
-              <label for="state">###################### </label>
-              <button  name="checkButton" type="submit" class="btn btn-lg btn-outline-secondary" style="font-size: medium; height">Visualizza stato</button>
-              <label for="state">###################### </label>
+              <label for="state" style="width:100%; height:30%"> </label>
+              <button name="checkButton" type="submit" class="btn btn-lg btn-outline-secondary" style="font-size: medium; height">Visualizza stato</button>
             </div>
           </div>
         </form>
@@ -120,7 +78,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <h2>Allievi bloccati</h2>
       <div class="jumbotron">
         <form class="form" action="" method="post">
+          <?php
+          //Controllo se é stato eseguito il POST
+          if ($_SERVER["REQUEST_METHOD"] == "POST") :
+            //Eseguo la connessione al database
+            require_once('php/db_connection.php');
+            $conn = new connection();
+            //Richiamo la funzione desiderata passandogli i parametri che necessita.
+            $result = $conn->getClassBlocked($_POST["anno"], $_POST["id"]);
 
+            ?>
             <div class="row">
               <div class="col-md-8 mb-3">
                 <table class="table table-striped">
@@ -130,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <th>Stato</th>
                     <th>
                       Seleziona
-                      <input type="checkbox" class="checkedAllBlockedSeleziona" id="checkAllBlockedState" checked>
+                      <input type="checkbox" class="checkedAllBlockedSeleziona" id="checkAllBlockedState" checked = "checked">
                     </th>
                     <th>
                       YouTube
@@ -138,29 +105,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </th>
                     <th>Classe</th>
                   </tr>
-                  <?php for ($i=0; $i < count($blockedResult); $i++): ?>
+                  <?php for ($i=0; $i < count($result); $i++): ?>
                     <tr>
-                      <td><?php echo $blockedResult[$i]['Nome']; ?></td>
-                      <td><?php echo $blockedResult[$i]['Cognome']; ?></td>
+                      <td><?php echo $result[$i]['Nome']; ?></td>
+                      <td><?php echo $result[$i]['Cognome']; ?></td>
                       <td><?php echo "<img src='Media/red.png' width='15px' height='15px'/>" ?></td>
-                      <td><input type="checkbox" class="checkBlockedState" name="studentBlocked[]" value="<?php echo $blockedResult[$i]['Nome']. "_" . $blockedResult[$i]['Cognome']?>" checked></td>
+                      <td><input type="checkbox" class="checkBlockedState" name="allievo" value="<?php echo $result[$i]['Nome']. "_" . $result[$i]['Cognome']?>>" checked = "checked"></td>
                       <td>
                         <?php
                           //Tramite un'operatore ternario controllo se lo stato di YouTube é 0 o 1 (false o true),
                           //in base al risultato carico l'immagine che serve.
-                          echo ($blockedResult[$i]['Youtube'] == 0 ?
+                          echo ($result[$i]['Youtube'] == 0 ?
                           "<img src='Media/red.png' style='margin-left:10px; height:1rem; width:1rem;'/>" : "<img src='Media/green.png' style='margin-left:10px; height:1rem; width:1rem;'/>"
                           );
                         ?>
-                        <input type="checkbox" class="checkBlockedYouTube" name="YouTubeBlocked[]" value="<?php echo $blockedResult[$i]['Nome']. "_" . $blockedResult[$i]['Cognome']?>">
+                        <input type="checkbox" class="checkBlockedYouTube" name="YoutTube" value="<?php echo $result[$i]['Nome']. "_" . $result[$i]['Cognome']?>">
                       </td>
                       <td>
-                        <?php echo $blockedResult[$i]['Anno_Classe'].$blockedResult[$i]['Id_Classe']; ?>
+                        <?php echo $result[$i]['Anno_Classe'].$result[$i]['Id_Classe']; ?>
                       </td>
                     </tr>
                   <?php endfor; ?>
-                  <input type="hidden" name="anno" value="<?php echo $_POST["anno"] ?>">
-                  <input type="hidden" name="id" value="<?php echo $_POST["id"] ?>">
                 </table>
               </div>
               <div class="col-md-4 mb-3">
@@ -179,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="col-md-6 mb-3">
                           <label for="state">Fine sblocco</label>
-                          <select class="custom-select d-block" name="end">
+                          <select class="custom-select d-block" name="start">
                             <option value="">Choose...</option>
                           </select>
                         </div>
@@ -193,11 +158,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </div>
             </div>
           <br>
+        <?php endif; ?>
       </form>
     </div>
     <h2>Allievi sbloccati</h2>
     <div class="jumbotron">
-      <form class="form" action="" method="post">
+      <form class="form" action="php/data_recovery.php" method="post">
+        <?php
+        //Controllo se é stato eseguito il POST
+        if ($_SERVER["REQUEST_METHOD"] == "POST") :
+          //Eseguo la connessione al database
+          require_once('php/db_connection.php');
+          $conn = new connection();
+          //Richiamo la funzione desiderata passandogli i parametri che necessita.
+          $result = $conn->getClassSblocked($_POST["anno"], $_POST["id"]);
+          //print_r($result);
+          ?>
           <div class="row">
             <div class="col-md-10 mb-3">
               <table class="table table-striped">
@@ -215,22 +191,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   </th>
                   <th>Classe</th>
                 </tr>
-                <?php for ($i=0; $i < count($unBlockedResult); $i++): ?>
+                <?php for ($i=0; $i < count($result); $i++): ?>
                   <tr>
-                    <td><?php echo $unBlockedResult[$i]['Nome']; ?></td>
-                    <td><?php echo $unBlockedResult[$i]['Cognome']; ?></td>
+                    <td><?php echo $result[$i]['Nome']; ?></td>
+                    <td><?php echo $result[$i]['Cognome']; ?></td>
                     <td><?php echo "<img src='Media/green.png' width='15px' height='15px'/>" ?></td>
-                    <td><input type="checkbox" class="checkSblockedState" name="studentSblocked" value="<?php echo $unBlockedResult[$i]['Nome']. "_" . $unBlockedResult[$i]['Cognome']?>"></td>
+                    <td><input type="checkbox" class="checkSblockedState" name="allievo" value="<?php echo $result[$i]['Nome']. "_" . $result[$i]['Cognome']?>"></td>
                     <td>
                       <?php
                       //Tramite un'operatore ternario controllo se lo stato di YouTube é 0 o 1 (false o true),
                       //in base al risultato carico l'immagine che serve.
-                      echo ($unBlockedResult[$i]['Youtube'] == 1 ?
+                      echo ($result[$i]['Youtube'] == 1 ?
                       "<img src='Media/green.png' style='margin-left:10px; height:1rem; width:1rem;'/>" : "<img src='Media/red.png' style='margin-left:10px; height:1rem; width:1rem;'/>");
                       ?>
-                      <input type="checkbox" class="checkSblockedYouTube" name="YouTubeSblocked" value="<?php echo $unBlockedResult[$i]['Nome']. "_" . $unBlockedResult[$i]['Cognome']?>">
+                      <input type="checkbox" class="checkSblockedYouTube" name="YouTube" value="<?php echo $result[$i]['Nome']. "_" . $result[$i]['Cognome']?>">
                     </td>
-                    <td><?php echo $unBlockedResult[$i]['Anno_Classe'].$unBlockedResult[$i]['Id_Classe']; ?></td>
+                    <td><?php echo $result[$i]['Anno_Classe'].$result[$i]['Id_Classe']; ?></td>
                   </tr>
                 <?php endfor;?>
               </table>
@@ -248,11 +224,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </table>
             </div>
           </div>
+        <?php endif; ?>
       </form>
     </div>
   </main>
 </div>
-<script type="text/javascript">
+<div id="prova">
+
+</div>
+<script>
 //Funzione che permette la gestione del checkbox select all dello stato presente nella tabella degli utenti bloccati.
 $("#checkAllBlockedState").click(function () {
   $(".checkBlockedState").prop('checked', $(this).prop('checked'));
@@ -272,16 +252,7 @@ $("#checkAllSblockedState").click(function () {
 $("#checkAllSblockedYouTube").click(function () {
   $(".checkSblockedYouTube").prop('checked', $(this).prop('checked'));
 });
-var year = null;
-var id = null;
-function getData(){
-  year = "<?php echo $_POST["anno"]; ?>";
-  id = "<?php echo $_POST["id"]; ?>";
 
-  document.getElementById("id").value = id;
-  document.getElementById("year").value = year;
-}
 </script>
-
 </body>
 </html>

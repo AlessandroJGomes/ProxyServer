@@ -60,7 +60,7 @@
     * @param year L'anno della classe selezionata.
     * @param id L'identificativo della classe selezionata.
     */
-    function getClassSblocked($year, $id){
+    function getClassUnblocked($year, $id){
       $stato = 1;
       $conn = self::__construct();
       //Query che permette l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
@@ -80,10 +80,6 @@
       }else {
         echo "NOn funziona";
       }
-    }
-
-    function gestions(){
-
     }
   }
 ?>
