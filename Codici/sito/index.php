@@ -13,26 +13,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   //Eseguo il controllo su quale bottone submit viene premuto, in base ai dati con cui l'amministratore lavora.
   if (isset($_POST["anno"]) && isset($_POST["id"])){
     //Richiamo la funzione desiderata passandogli i parametri che necessita.
-    $blockedResult = $conn->getClassBlocked($_POST["anno"], $_POST["id"]);
-    $unBlockedResult = $conn->getClassUnblocked($_POST["anno"], $_POST["id"]);
+    $blockedResult = $conn->getClassBlocked($_POST["anno"], $_POST["id"], "", "");
+    $unBlockedResult = $conn->getClassUnblocked($_POST["anno"], $_POST["id"], "","");
   }
   if (isset($_POST["start"]) && isset($_POST["end"])) {
     if (isset($_POST["studentBlocked"])) {
-        $change = $gestions->getCheckboxState($_POST["studentBlocked"]);
+        $gestions->getCheckboxState($_POST["studentBlocked"], $_POST["anno"], $_POST["id"], $conn);
     }
     if (isset($_POST["YouTubeBlocked"])) {
-        $change = $gestions->getCheckboxYouTube($_POST["YouTubeBlocked"]);
+        $gestions->getCheckboxYouTube($_POST["YouTubeBlocked"], $_POST["anno"], $_POST["id"], $conn);
     }
     /**var_dump($_POST["studentBlocked"]);
     echo "<br>";
     var_dump($_POST["YouTubeBlocked"]);*/
   }
   else {
-    if (isset($_POST["studentBlocked"])) {
-        $change = $gestions->getCheckboxState($_POST["studentBlocked"]);
+    if (isset($_POST["studentUnBlocked"])) {
+        $gestions->getCheckboxState($_POST["studentUnBlocked"], $_POST["anno"], $_POST["id"], $conn);
     }
-    if (isset($_POST["YouTubeBlocked"])) {
-        $change = $gestions->getCheckboxYouTube($_POST["YouTubeBlocked"]);
+    if (isset($_POST["youTubeUnBlocked"])) {
+        $gestions->getCheckboxYouTube($_POST["youTubeUnBlocked"], $_POST["anno"], $_POST["id"], $conn);
     }
   }
 }
@@ -120,7 +120,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <h2>Allievi bloccati</h2>
       <div class="jumbotron">
         <form class="form" action="" method="post">
-
             <div class="row">
               <div class="col-md-8 mb-3">
                 <table class="table table-striped">
@@ -220,7 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <td><?php echo $unBlockedResult[$i]['Nome']; ?></td>
                     <td><?php echo $unBlockedResult[$i]['Cognome']; ?></td>
                     <td><?php echo "<img src='Media/green.png' width='15px' height='15px'/>" ?></td>
-                    <td><input type="checkbox" class="checkSblockedState" name="studentSblocked" value="<?php echo $unBlockedResult[$i]['Nome']. "_" . $unBlockedResult[$i]['Cognome']?>"></td>
+                    <td><input type="checkbox" class="checkSblockedState" name="studentUnBlocked[]" value="<?php echo $unBlockedResult[$i]['Nome']. "_" . $unBlockedResult[$i]['Cognome']?>"></td>
                     <td>
                       <?php
                       //Tramite un'operatore ternario controllo se lo stato di YouTube é 0 o 1 (false o true),
@@ -228,11 +227,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       echo ($unBlockedResult[$i]['Youtube'] == 1 ?
                       "<img src='Media/green.png' style='margin-left:10px; height:1rem; width:1rem;'/>" : "<img src='Media/red.png' style='margin-left:10px; height:1rem; width:1rem;'/>");
                       ?>
-                      <input type="checkbox" class="checkSblockedYouTube" name="YouTubeSblocked" value="<?php echo $unBlockedResult[$i]['Nome']. "_" . $unBlockedResult[$i]['Cognome']?>">
+                      <input type="checkbox" class="checkSblockedYouTube" name="youTubeUnBlocked[]" value="<?php echo $unBlockedResult[$i]['Nome']. "_" . $unBlockedResult[$i]['Cognome']?>">
                     </td>
                     <td><?php echo $unBlockedResult[$i]['Anno_Classe'].$unBlockedResult[$i]['Id_Classe']; ?></td>
                   </tr>
                 <?php endfor;?>
+                <input type="hidden" name="anno" value="<?php echo $_POST["anno"] ?>">
+                <input type="hidden" name="id" value="<?php echo $_POST["id"] ?>">
               </table>
             </div>
             <div class="col-md-2 mb-3">

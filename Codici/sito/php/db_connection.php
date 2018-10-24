@@ -33,13 +33,23 @@
     * @param year L'anno della classe selezionata.
     * @param id L'identificativo della classe selezionata.
     */
-    function getClassBlocked($year, $id){
+    function getClassBlocked($year, $id, $name, $surname){
       $stato = 0;
+      $changeState = 1;
       $conn = self::__construct();
-      //Query che permette l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
-      //delle SQLInjection.
-      $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
-      $stmt->bind_param("isi", $year, $id, $stato);
+      if($name == "" && $surname == ""){
+        //Query che permettono l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
+        //delle SQLInjection.
+        $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
+        $stmt->bind_param("isi", $year, $id, $state);
+      }else{
+        //Query che permettono l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
+        //delle SQLInjection.
+        $stmt = $this->conn->prepare ("UPDATE alunni set Stato_Accesso = ? where Nome = ? && Cognome = ?");
+        $stmt->bind_param("iss", $changeState, $name, $surname);
+        $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
+        $stmt->bind_param("isi", $year, $id, $state);
+      }
 
       $containerData = array();
       //Eseguo la query.
@@ -60,14 +70,23 @@
     * @param year L'anno della classe selezionata.
     * @param id L'identificativo della classe selezionata.
     */
-    function getClassUnblocked($year, $id){
-      $stato = 1;
+    function getClassUnblocked($year, $id, $name, $surname){
+      $state = 1;
+      $changeState = 0;
       $conn = self::__construct();
-      //Query che permette l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
-      //delle SQLInjection.
-      $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
-      $stmt->bind_param("isi", $year, $id, $stato);
-
+      if($name == "" && $surname == ""){
+        //Query che permettono l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
+        //delle SQLInjection.
+        $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
+        $stmt->bind_param("isi", $year, $id, $state);
+      }else{
+        //Query che permettono l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
+        //delle SQLInjection.
+        $stmt = $this->conn->prepare ("UPDATE alunni set Stato_Accesso = ? where Nome = ? && Cognome = ?");
+        $stmt->bind_param("iss", $changeState, $name, $surname);
+        $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
+        $stmt->bind_param("isi", $year, $id, $state);
+      }
       $containerData = array();
       //Eseguo la query.
       if($stmt->execute()){
