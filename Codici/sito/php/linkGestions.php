@@ -6,11 +6,6 @@
    */
   class linkGestions
   {
-    private $path = null;
-    private $file = null;
-    private $list = null;
-
-
     function __construct()
     {
     }
@@ -18,20 +13,21 @@
     function getData(){
       $path = "../CSV/link.csv";
       $file = fopen($path,"r");
-      $list = array();
-      $a = 0;
+      $getlist = array();
       for ($i = 0; $i < count($file) ; $i++) {
-        array_push($list, $i);
+        array_push($getlist, fgetcsv($file));
 
       }
-      return $list;
+      return $getlist;
       fclose($file);
     }
 
     function setData($link){
+      $path = "../CSV/link.csv";
       $file = fopen($path, "w");
-      $list = array_push($link);
-      foreach ($list as $line)
+      $setList = array();
+      array_push($setList, $link);
+      foreach ($setList as $line)
       {
         fputcsv($file,explode(',',$line));
       }

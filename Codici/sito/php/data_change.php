@@ -1,89 +1,102 @@
 <?php
+
   require_once('db_connection.php');
 
   /**
-   *
-   */
-  class gestions
-  {
+  * @author Alessandro Gomes
+  * @version 09.10.2018
+  * Questa classe gestisce l'interazione della scelta degli allievi a cui sbloccare o bloccare internet o YouTube.
+  * Queste funzioni verranno poi utilizzate tramite richiamo dai file che necessitano tali funzioni.
+  */
+  class gestions {
 
-    function __construct()
-    {
-
+    function __construct() {
     }
-    function getCheckboxState($state, $year, $id, $conn){
+
+    /**
+    * Questa funzione si occupa della gestione dei checkbox dello stato d'accesso selezionati da parte dell'amministratore.
+    * @param state L'array contenente tutti i nomi ed i cognomi degli allievi selezionati.
+    * @param year L'anno della classe selezionata.
+    * @param id L'identificativo della classe selezionata.
+    * @param currentState Lo stato attuale dell'utente (bloccato o sbloccato).
+    * @param conn L'oggetto che gestisce la connessione al database.
+    */
+    function getCheckboxState($state, $year, $id, $currentState, $conn) {
+      //Creazione variabili.
+      $blockState = 0;
+      $UnBlockState = 1;
       $resState = array();
-      if(count($state) != 0){
+      //Controllo se l'array contenente i nomi ed i cognomi degli alunni selezionati é vuoto oppure no.
+      if(count($state) != 0) {
+        //Ciclo l'array e divido il nome ed il cognome di ogni allievo in un'differente array.
         for ($i=0; $i < count($state); $i++) {
           $stateId = explode("_", $state[$i]);
           array_push($resState, $stateId);
-
-          $conn->getClassBlocked($year, $id, $resState[$i][0], $resState[$i][1]);
-          $conn->getClassUnblocked($year, $id, $resState[$i][0], $resState[$i][1]);
-          /*
-          echo "<br>";
-          echo "nome = ";
-          print_r($resState[$i][0]);
-          echo "<br>";
-          echo "cognome = ";
-          print_r($resState[$i][1]);
-          echo "<br>";
-          */
+          //Controllo lo stato d'accesso ad internet se é bloccato (0) o sbloccato (1).
+          if($currentState == 0) {
+            //Eseguo la query che modifica lo stato d'accesso.
+            $stmt = $conn->conn->prepare("UPDATE alunni set Stato_Accesso = ? where Nome = ? && Cognome = ?");
+            $stmt->bind_param("iss", $UnBlockState, $resState[$i][0],  $resState[$i][1]);
+          }else {
+            $stmt = $conn->conn->prepare("UPDATE alunni set Stato_Accesso = ? where Nome = ? && Cognome = ?");
+            $stmt->bind_param("iss", $blockState, $resState[$i][0],  $resState[$i][1]);
+          }
+          if($stmt->execute()) {
+            //Richiamo le funzioni che si occupano di stampare a schermo le due tabelle degli alunni bloccati e non.
+            $conn->getClassBlocked($year, $id);
+            $conn->getClassUnblocked($year, $id);
+          }else {
+            echo "Query non eseguita";
+          }
         }
-      }else{
-        echo "Non funziona";
+      }else {
+        echo "Nessun'alunno selezionato";
       }
-      echo "<br>";
-      echo "<pre>";
-      echo "Stato";
-      print_r($resState);
-      echo "</pre>";
-
     }
 
-    function getCheckboxYouTube($youtube, $year, $id, $conn){
+    /**
+    * Questa funzione si occupa della gestione dei checkbox di YouTube selezionati da parte dell'amministratore.
+    * @param youtube L'array contenente tutti i nomi ed i cognomi degli allievi selezionati.
+    * @param year L'anno della classe selezionata.
+    * @param id L'identificativo della classe selezionata.
+    * @param currentState Lo stato attuale dell'utente (bloccato o sbloccato).
+    * @param conn L'oggetto che gestisce la connessione al database.
+    */
+    function getCheckboxYouTube($youtube, $year, $id, $currentState, $conn) {
+      //Creazione variabili.
+      $blockState = 0;
+      $UnBlockState = 1;
       $resYouTube = array();
-      if(count($youtube) != 0){
+      //Controllo se l'array contenente i nomi ed i cognomi degli alunni selezionati é vuoto oppure no.
+      if(count($youtube) != 0) {
+        //Ciclo l'array e divido il nome ed il cognome di ogni allievo in un'differente array.
         for ($i=0; $i < count($youtube); $i++) {
           $youtubeId = explode("_", $youtube[$i]);
           array_push($resYouTube, $youtubeId);
 
-          $conn->getClassBlocked($year, $id, $resYouTube[$i][0], $resYouTube[$i][1]);
-          $conn->getClassUnblocked($year, $id, $resYouTube[$i][0], $resYouTube[$i][1]);
+          //$youtubeState = $conn->conn->prepare ("SELECT Youtube FROM alunni where Anno_Classe = ? && Id_Classe = ? && Nome = ? && Cognome = ?");
+          //$youtubeState->bind_param("isss", $year, $id, $resYouTube[$i][0],  $resYouTube[$i][1]);
+
+          //Controllo lo stato d'accesso di YouTubet se é bloccato (0) o sbloccato (1).
+          if($currentState == 0) {
+            //Eseguo la query che modifica lo stato d'accesso per YouTube.
+            $stmt = $conn->conn->prepare("UPDATE alunni set Youtube = ? where Nome = ? && Cognome = ?");
+            $stmt->bind_param("iss", $UnBlockState, $resYouTube[$i][0],  $resYouTube[$i][1]);
+          }else {
+            $stmt = $conn->conn->prepare("UPDATE alunni set Youtube = ? where Nome = ? && Cognome = ?");
+            $stmt->bind_param("iss", $blockState, $resYouTube[$i][0],  $resYouTube[$i][1]);
+          }
+          if($stmt->execute()) {
+            //Richiamo le funzioni che si occupano di stampare a schermo le due tabelle degli alunni bloccati e non.
+            $conn->getClassBlocked($year, $id);
+            $conn->getClassUnblocked($year, $id);
+          }else {
+            echo "Query non eseguita";
+          }
         }
       }else{
-        echo "Non funziona";
+        echo "Nessun'alunno selezionato";
       }
-
-      echo "<pre>";
-      echo "YouTube";
-      print_r($resYouTube);
-      echo "</pre>";
-
     }
-}
-
-
-
-
-
-  /*echo "<table>";
-  echo "<tr>";
-  echo "<th>Nome</th>";
-  echo "<th>Cognome</th>";
-  echo "<th>Stato</th>";
-  echo "<th>YouTube</th>";
-  echo "<th>Anno</th>";
-  echo "<th>Id</th>";
-  echo "</tr>";
-  while($stmt->fetch()) {
-    echo "<tr>";
-    echo "<td>$nome</td>";
-    echo "<td>$cognome</td>";
-    echo "<td>$anni</td>";
-    echo "<td>$genere</td>";
-    echo "</tr>";
   }
-  echo "</table><br>";*/
-
- ?>
+?>

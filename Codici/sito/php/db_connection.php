@@ -1,12 +1,13 @@
 <?php
+
   /**
-   * @author Alessandro Gomes
-   * @version 09.10.2018
-   * Questa classe gestisce la connessione al database e le iterazioni con esso tramite delle query contenute in funzioni specifiche.
-   * Queste funzioni verranno poi utilizzate tramite richiamo dai file che necessitano tali funzioni.
-   */
-  class connection
-  {
+  * @author Alessandro Gomes
+  * @version 09.10.2018
+  * Questa classe gestisce la connessione al database e le iterazioni con esso tramite delle query contenute in funzioni specifiche.
+  * Queste funzioni verranno poi utilizzate tramite richiamo dai file che necessitano tali funzioni.
+  */
+  class connection {
+
     //Connessione al db mysql
     private $servername = "localhost";
     private $username = "root";
@@ -15,10 +16,12 @@
     private $port = 3306;
 
     // Creo la variabile connessione
-    private $conn;
+    public $conn;
 
-    function __construct()
-    {
+    /**
+    * Metodo costruttore in cui creo la connessione con il database.
+    */
+    function __construct() {
       // Creo la connessione
       $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname, $this->port);
 
@@ -33,25 +36,15 @@
     * @param year L'anno della classe selezionata.
     * @param id L'identificativo della classe selezionata.
     */
-    function getClassBlocked($year, $id, $name, $surname){
-      $stato = 0;
+    function getClassBlocked($year, $id) {
+      $state = 0;
       $changeState = 1;
-      $conn = self::__construct();
-      if($name == "" && $surname == ""){
-        //Query che permettono l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
-        //delle SQLInjection.
-        $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
-        $stmt->bind_param("isi", $year, $id, $state);
-      }else{
-        //Query che permettono l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
-        //delle SQLInjection.
-        $stmt = $this->conn->prepare ("UPDATE alunni set Stato_Accesso = ? where Nome = ? && Cognome = ?");
-        $stmt->bind_param("iss", $changeState, $name, $surname);
-        $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
-        $stmt->bind_param("isi", $year, $id, $state);
-      }
-
       $containerData = array();
+      $conn = self::__construct();
+      //Query che permettono l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
+      //delle SQLInjection.
+      $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
+      $stmt->bind_param("isi", $year, $id, $state);
       //Eseguo la query.
       if($stmt->execute()){
         $result = $stmt->get_result();
@@ -70,24 +63,15 @@
     * @param year L'anno della classe selezionata.
     * @param id L'identificativo della classe selezionata.
     */
-    function getClassUnblocked($year, $id, $name, $surname){
+    function getClassUnblocked($year, $id){
       $state = 1;
       $changeState = 0;
-      $conn = self::__construct();
-      if($name == "" && $surname == ""){
-        //Query che permettono l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
-        //delle SQLInjection.
-        $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
-        $stmt->bind_param("isi", $year, $id, $state);
-      }else{
-        //Query che permettono l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
-        //delle SQLInjection.
-        $stmt = $this->conn->prepare ("UPDATE alunni set Stato_Accesso = ? where Nome = ? && Cognome = ?");
-        $stmt->bind_param("iss", $changeState, $name, $surname);
-        $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
-        $stmt->bind_param("isi", $year, $id, $state);
-      }
       $containerData = array();
+      $conn = self::__construct();
+      //Query che permettono l'estrapolazione degli utenti desiderati, utilizzando un prepare statement per evitare
+      //delle SQLInjection.
+      $stmt = $this->conn->prepare ("SELECT * FROM alunni where Anno_Classe = ? AND Id_Classe = ? AND Stato_Accesso = ?");
+      $stmt->bind_param("isi", $year, $id, $state);
       //Eseguo la query.
       if($stmt->execute()){
         $result = $stmt->get_result();

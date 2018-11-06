@@ -1,4 +1,5 @@
 <?php
+session_start();
 $blockedResult = null;
 $unBlockedResult = null;
 $change = null;
@@ -12,32 +13,36 @@ $gestions = new gestions();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   //Eseguo il controllo su quale bottone submit viene premuto, in base ai dati con cui l'amministratore lavora.
   if (isset($_POST["anno"]) && isset($_POST["id"])){
-    //Richiamo la funzione desiderata passandogli i parametri che necessita.
-    $blockedResult = $conn->getClassBlocked($_POST["anno"], $_POST["id"], "", "");
-    $unBlockedResult = $conn->getClassUnblocked($_POST["anno"], $_POST["id"], "","");
+    //Creo delle variabili di sessione e le assegno il valore che é contenuto nel post degli input dell'anno e dell'id.
+    $_SESSION["anno"] = $_POST["anno"];
+    $_SESSION["id"] = $_POST["id"];
   }
+  //Se l'amministratore lavora con la tabella degli utenti bloccati, richiamo le funzioni specifiche con i relativi parametri.
+  //Altrimenti "so" che sta lavorando con l'altra tabella.
   if (isset($_POST["start"]) && isset($_POST["end"])) {
     if (isset($_POST["studentBlocked"])) {
-        $gestions->getCheckboxState($_POST["studentBlocked"], $_POST["anno"], $_POST["id"], $conn);
+        $gestions->getCheckboxState($_POST["studentBlocked"], $_SESSION["anno"], $_SESSION["id"], 0, $conn);
     }
     if (isset($_POST["YouTubeBlocked"])) {
-        $gestions->getCheckboxYouTube($_POST["YouTubeBlocked"], $_POST["anno"], $_POST["id"], $conn);
+        $gestions->getCheckboxYouTube($_POST["YouTubeBlocked"], $_SESSION["anno"], $_SESSION["id"], 0, $conn);
     }
-    /**var_dump($_POST["studentBlocked"]);
-    echo "<br>";
-    var_dump($_POST["YouTubeBlocked"]);*/
   }
   else {
     if (isset($_POST["studentUnBlocked"])) {
-        $gestions->getCheckboxState($_POST["studentUnBlocked"], $_POST["anno"], $_POST["id"], $conn);
+        $gestions->getCheckboxState($_POST["studentUnBlocked"], $_SESSION["anno"], $_SESSION["id"], 1, $conn);
     }
     if (isset($_POST["youTubeUnBlocked"])) {
-        $gestions->getCheckboxYouTube($_POST["youTubeUnBlocked"], $_POST["anno"], $_POST["id"], $conn);
+        $gestions->getCheckboxYouTube($_POST["youTubeUnBlocked"], $_SESSION["anno"], $_SESSION["id"], 1, $conn);
     }
   }
 }
+//Stampo a schermo le tabelle anche senza la necessità del click del primo bottone submit.
+if (isset($_SESSION["anno"]) && isset($_SESSION["id"])) {
+    //Richiamo la funzione desiderata passandogli i parametri che necessita.
+  $blockedResult = $conn->getClassBlocked($_SESSION["anno"], $_SESSION["id"]);
+  $unBlockedResult = $conn->getClassUnblocked($_SESSION["anno"], $_SESSION["id"]);
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-md-4 mb-3">
               <label for="anno">Anno scolastico</label>
               <select class="custom-select d-block w-100" name="anno" id="year" required>
-                <option value="0">Choose...</option>
+                <option value="">Choose...</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -158,8 +163,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       </td>
                     </tr>
                   <?php endfor; ?>
-                  <input type="hidden" name="anno" value="<?php echo $_POST["anno"] ?>">
-                  <input type="hidden" name="id" value="<?php echo $_POST["id"] ?>">
+                  <input type="hidden" name="anno" value="<?php echo $_SESSION["anno"] ?>">
+                  <input type="hidden" name="id" value="<?php echo $_SESSION["id"] ?>">
                 </table>
               </div>
               <div class="col-md-4 mb-3">
@@ -183,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                           </select>
                         </div>
                         <div class="col-md-1 mb-3">
-                          <button name="checkButton" type="submit" class="btn btn-outline-secondary" style="font-size: medium; height">Sblocca selezionati</button>
+                          <button name="checkButton" type="submit" class="btn btn-outline-secondary" style="font-size: medium; height" >Sblocca selezionati</button>
                         </div>
                       </div>
                     </td>
@@ -232,8 +237,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <td><?php echo $unBlockedResult[$i]['Anno_Classe'].$unBlockedResult[$i]['Id_Classe']; ?></td>
                   </tr>
                 <?php endfor;?>
-                <input type="hidden" name="anno" value="<?php echo $_POST["anno"] ?>">
-                <input type="hidden" name="id" value="<?php echo $_POST["id"] ?>">
+                <input type="hidden" name="anno" value="<?php echo $_SESSION["anno"] ?>">
+                <input type="hidden" name="id" value="<?php echo $_SESSION["id"] ?>">
               </table>
             </div>
             <div class="col-md-2 mb-3">
@@ -276,13 +281,12 @@ $("#checkAllSblockedYouTube").click(function () {
 var year = null;
 var id = null;
 function getData(){
-  year = "<?php echo $_POST["anno"]; ?>";
-  id = "<?php echo $_POST["id"]; ?>";
+  year = "<?php echo $_SESSION["anno"]; ?>";
+  id = "<?php echo $_SESSION["id"]; ?>";
 
   document.getElementById("id").value = id;
   document.getElementById("year").value = year;
 }
 </script>
-
 </body>
 </html>
