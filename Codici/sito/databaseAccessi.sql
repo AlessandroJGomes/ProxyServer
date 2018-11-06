@@ -21,6 +21,6 @@ FOREIGN KEY (Anno_Classe, Id_Classe) REFERENCES classi(Anno_Classe, Id_Classe) o
 
 INSERT INTO alunni values ("Alessandro", "Colugnat", true, true, 4, "AC");
 
-UPDATE alunni set Stato_Accesso = 0 where Nome = "Alessandro" && Cognome = "Gomes";
+UPDATE alunni set Youtube = 1 where Nome = "Alessandro" && Cognome = "Gomes";
 
 SELECT * FROM alunni where Anno_Classe = 4 AND Id_Classe = "AC" AND Stato_Accesso = 0;
