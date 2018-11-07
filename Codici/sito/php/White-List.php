@@ -10,9 +10,13 @@
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Eseguo il controllo su quale bottone submit viene premuto, in base ai dati con cui l'amministratore lavora.
     if (isset($_POST["webSite"])) {
-      $set = $classe->setData($_POST["webSite"]);
+      $_SESSION["webSite"] = $_POST["webSite"];
     }
   }
+  if (isset($_SESSION["webSite"])) {
+    $set = $classe->setData($_SESSION["webSite"]);
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,8 +73,9 @@
               </div>
             </div>
             <div class="col-md-4 mb-3">
-              <label for="state" style="width:100%; height:30%"> </label>
+              <label for="state">###################### </label>
               <button name="checkButton" type="submit" class="btn btn-lg btn-outline-secondary" style="font-size: medium; height">Abilitare link</button>
+              <label for="state">###################### </label>
             </div>
           </div>
         </form>
@@ -80,9 +85,9 @@
               <tr>
                 <th>Link</th>
               </tr>
-                <?php for ($i=0; $i < count($get[0]); $i++): ?>
+                <?php for ($i=0; $i < count($get); $i++): ?>
                 <tr>
-                  <td><?php echo $get[0][$i]; ?></td>
+                  <td><?php echo $get[$i][0]; ?></td>
                 </tr>
                 <?php endfor;?>
             </table>

@@ -6,37 +6,48 @@
    */
   class linkGestions
   {
+    private $checkLink = array();
+
+
     function __construct()
     {
+
     }
 
     function getData(){
+
+      $getList = array();
       $path = "../CSV/link.csv";
       $file = fopen($path,"r");
-      $getlist = array();
-      for ($i = 0; $i < count($file) ; $i++) {
-        array_push($getlist, fgetcsv($file));
+      while ($data = fgetcsv($file)) {
+
+        array_push($getList, $data);
 
       }
-      return $getlist;
+      $checkLink = $getList;
+      return $getList;
       fclose($file);
     }
 
-    function setData($link){
-      $path = "../CSV/link.csv";
-      $file = fopen($path, "w");
+
+    function setData($link) {
+
       $setList = array();
+      $path = "../CSV/link.csv";
+      $file = fopen($path, "a");
       array_push($setList, $link);
+
+      //print_r($setList);
       foreach ($setList as $line)
       {
-        fputcsv($file,explode(',',$line));
+        //var_dump($setList);
+        print_r(in_array($link, $this->getData()));
+        fputcsv($file, $setList);
       }
       fclose($file);
     }
-
-
   }
-/**
+/*
   $path = "../CSV/link.csv";
   $list = array(
     "www.instagram.com, www.tio.ch, www.google.com, www.facebook.com",
