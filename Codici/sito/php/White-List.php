@@ -1,11 +1,28 @@
-<!doctype html>
+<?php
+  session_start();
+
+  require('linkGestions.php');
+  $classe = new linkGestions();
+  //Richiamo la funzione desiderata passandogli i parametri che necessita.
+  $get = $classe->getData();
+
+  //Controllo se é stato eseguito il POST
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //Eseguo il controllo su quale bottone submit viene premuto, in base ai dati con cui l'amministratore lavora.
+    if (isset($_POST["webSite"])) {
+      $set = $classe->setData($_POST["webSite"]);
+    }
+  }
+
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Progetto SAMT Controllo dell’accesso ad una rete WiFi tramite proxy Server I4AC 2018">
   <meta name="author" content="Alessandro Gomes">
-  <link rel="icon" href="images/favicon.ico">
+  <link rel="icon" href="../images/favicon.ico">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -19,12 +36,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-  <title>Log server proxy</title>
+  <title>White-List server proxy</title>
 </head>
 <body>
-  <?php
-
-  ?>
   <div class="container">
     <header class="header clearfix">
       <nav>
@@ -52,38 +66,30 @@
             <div class="col-md-4 mb-3">
               <div class="form-group">
                 <label for="usr">Inserire Link</label>
-                <input type="text" class="form-control" id="link" name="sito" required>
+                <input type="text" class="form-control" id="link" name="webSite" required>
               </div>
             </div>
             <div class="col-md-4 mb-3">
-              <label for="state" style="width:100%; height:30%"> </label>
+              <label for="state">###################### </label>
               <button name="checkButton" type="submit" class="btn btn-lg btn-outline-secondary" style="font-size: medium; height">Abilitare link</button>
+              <label for="state">###################### </label>
             </div>
           </div>
         </form>
-        <?php
-          require('linkGestions.php');
-          $classe = new linkGestions();
-          //Richiamo la funzione desiderata passandogli i parametri che necessita.
-          $res = $classe->getData();
-        ?>
-
         <div class="row">
           <div class="col-md-10 mb-3">
             <table class="table table-striped">
               <tr>
                 <th>Link</th>
               </tr>
-                <?php for ($i=0; $i < count($classe); $i++): ?>
+                <?php for ($i=0; $i < count($get); $i++): ?>
                 <tr>
-                  <td><?php echo $res[$i]['link']; ?></td>
+                  <td><?php echo $get[$i][0]; ?></td>
                 </tr>
                 <?php endfor;?>
             </table>
           </div>
         </div>
-
-
       </div>
     </main>
   </div>
