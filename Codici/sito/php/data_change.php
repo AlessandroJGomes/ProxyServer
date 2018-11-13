@@ -9,7 +9,9 @@
   * Queste funzioni verranno poi utilizzate tramite richiamo dai file che necessitano tali funzioni.
   */
   class gestions {
-
+    /**
+    * Metodo costruttore della classe linkGestions.
+    */
     function __construct() {
     }
 
@@ -94,7 +96,7 @@
             echo "Query non eseguita";
           }
         }
-      }else{
+      }else {
         echo "Nessun'alunno selezionato";
       }
     }

@@ -6,9 +6,11 @@ $change = null;
 //Eseguo il require dei file esterni necessari.
 require_once('php/db_connection.php');
 require_once('php/data_change.php');
+require_once('php/timeGestions.php');
 //Creao gli oggetti delle classi necessarie;
 $conn = new connection();
 $gestions = new gestions();
+$time = new time();
 //Controllo se é stato eseguito il POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   //Eseguo il controllo su quale bottone submit viene premuto, in base ai dati con cui l'amministratore lavora.
@@ -178,13 +180,15 @@ if (isset($_SESSION["anno"]) && isset($_SESSION["id"])) {
                         <div class="col-md-6 mb-3">
                           <label for="state">Inizio sblocco</label>
                           <select class="custom-select d-block" name="start">
-                            <option value="">Choose...</option>
+                            <option value="" selected>Choose...</option>
+                            <?php echo $time->getTime(); ?>
                           </select>
                         </div>
                         <div class="col-md-6 mb-3">
                           <label for="state">Fine sblocco</label>
                           <select class="custom-select d-block" name="end">
                             <option value="">Choose...</option>
+                            <?php echo $time->getTime(); ?>
                           </select>
                         </div>
                         <div class="col-md-1 mb-3">

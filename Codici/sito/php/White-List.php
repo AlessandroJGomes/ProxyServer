@@ -10,11 +10,8 @@
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Eseguo il controllo su quale bottone submit viene premuto, in base ai dati con cui l'amministratore lavora.
     if (isset($_POST["webSite"])) {
-      $_SESSION["webSite"] = $_POST["webSite"];
+      $set = $classe->setData($_POST["webSite"]);
     }
-  }
-  if (isset($_SESSION["webSite"])) {
-    $set = $classe->setData($_SESSION["webSite"]);
   }
 
 ?>
@@ -25,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Progetto SAMT Controllo dell’accesso ad una rete WiFi tramite proxy Server I4AC 2018">
   <meta name="author" content="Alessandro Gomes">
-  <link rel="icon" href="images/favicon.ico">
+  <link rel="icon" href="../images/favicon.ico">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">

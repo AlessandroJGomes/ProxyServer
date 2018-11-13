@@ -35,6 +35,7 @@
     * Questa funzione si occupa della "selezione" degli utenti che non posseggono l'accesso ad Internet, tramite una query.
     * @param year L'anno della classe selezionata.
     * @param id L'identificativo della classe selezionata.
+    * @return list Array di stringhe contenente tutti gli alunni bloccati.
     */
     function getClassBlocked($year, $id) {
       $state = 0;
@@ -62,8 +63,9 @@
     * Questa funzione si occupa della "selezione" degli utenti che posseggono l'accesso ad Internet, tramite una query.
     * @param year L'anno della classe selezionata.
     * @param id L'identificativo della classe selezionata.
+    * @return list Array di stringhe contenente tutti gli alunni sbloccati.
     */
-    function getClassUnblocked($year, $id){
+    function getClassUnblocked($year, $id) {
       $state = 1;
       $changeState = 0;
       $containerData = array();
