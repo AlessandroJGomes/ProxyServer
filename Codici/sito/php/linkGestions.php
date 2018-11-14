@@ -25,10 +25,11 @@
       while ($data = fgetcsv($file)) {
         array_push($getList, $data);
       }
-      return $getList;
       $checklink = $getList;
       //Chiudo il file CSV.
       fclose($file);
+
+      return $getList;
     }
 
     /**

@@ -23,18 +23,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   //Altrimenti "so" che sta lavorando con l'altra tabella.
   if (isset($_POST["start"]) && isset($_POST["end"])) {
     if (isset($_POST["studentBlocked"])) {
-        $gestions->getCheckboxState($_POST["studentBlocked"], $_SESSION["anno"], $_SESSION["id"], 0, $conn);
+        $gestions->getCheckboxState($_POST["studentBlocked"], $_SESSION["anno"], $_SESSION["id"], $_POST["start"], $_POST["end"], 0, $conn);
     }
     if (isset($_POST["YouTubeBlocked"])) {
-        $gestions->getCheckboxYouTube($_POST["YouTubeBlocked"], $_SESSION["anno"], $_SESSION["id"], 0, $conn);
+        $gestions->getCheckboxYouTube($_POST["YouTubeBlocked"], $_SESSION["anno"], $_SESSION["id"], $_POST["start"], $_POST["end"], 0, $conn);
     }
   }
   else {
     if (isset($_POST["studentUnBlocked"])) {
-        $gestions->getCheckboxState($_POST["studentUnBlocked"], $_SESSION["anno"], $_SESSION["id"], 1, $conn);
+        $gestions->getCheckboxState($_POST["studentUnBlocked"], $_SESSION["anno"], $_SESSION["id"], $_POST["start"], $_POST["end"], 1, $conn);
     }
     if (isset($_POST["youTubeUnBlocked"])) {
-        $gestions->getCheckboxYouTube($_POST["youTubeUnBlocked"], $_SESSION["anno"], $_SESSION["id"], 1, $conn);
+        $gestions->getCheckboxYouTube($_POST["youTubeUnBlocked"], $_SESSION["anno"], $_SESSION["id"], $_POST["start"], $_POST["end"], 1, $conn);
     }
   }
 }
@@ -149,7 +149,7 @@ if (isset($_SESSION["anno"]) && isset($_SESSION["id"])) {
                       <td><?php echo $blockedResult[$i]['Nome']; ?></td>
                       <td><?php echo $blockedResult[$i]['Cognome']; ?></td>
                       <td><?php echo "<img src='Media/red.png' width='15px' height='15px'/>" ?></td>
-                      <td><input type="checkbox" class="checkBlockedState" name="studentBlocked[]" value="<?php echo $blockedResult[$i]['Nome']. "_" . $blockedResult[$i]['Cognome']?>" checked></td>
+                      <td><input type="checkbox" class="checkBlockedState" name="studentBlocked[]" value="<?php echo $blockedResult[$i]['Nome']. "." . $blockedResult[$i]['Cognome']?>" checked></td>
                       <td>
                         <?php
                           //Tramite un'operatore ternario controllo se lo stato di YouTube é 0 o 1 (false o true),
@@ -158,7 +158,7 @@ if (isset($_SESSION["anno"]) && isset($_SESSION["id"])) {
                           "<img src='Media/red.png' style='margin-left:10px; height:1rem; width:1rem;'/>" : "<img src='Media/green.png' style='margin-left:10px; height:1rem; width:1rem;'/>"
                           );
                         ?>
-                        <input type="checkbox" class="checkBlockedYouTube" name="YouTubeBlocked[]" value="<?php echo $blockedResult[$i]['Nome']. "_" . $blockedResult[$i]['Cognome']?>">
+                        <input type="checkbox" class="checkBlockedYouTube" name="YouTubeBlocked[]" value="<?php echo $blockedResult[$i]['Nome']. "." . $blockedResult[$i]['Cognome']?>">
                       </td>
                       <td>
                         <?php echo $blockedResult[$i]['Anno_Classe'].$blockedResult[$i]['Id_Classe']; ?>
@@ -228,7 +228,7 @@ if (isset($_SESSION["anno"]) && isset($_SESSION["id"])) {
                     <td><?php echo $unBlockedResult[$i]['Nome']; ?></td>
                     <td><?php echo $unBlockedResult[$i]['Cognome']; ?></td>
                     <td><?php echo "<img src='Media/green.png' width='15px' height='15px'/>" ?></td>
-                    <td><input type="checkbox" class="checkSblockedState" name="studentUnBlocked[]" value="<?php echo $unBlockedResult[$i]['Nome']. "_" . $unBlockedResult[$i]['Cognome']?>"></td>
+                    <td><input type="checkbox" class="checkSblockedState" name="studentUnBlocked[]" value="<?php echo $unBlockedResult[$i]['Nome']. "." . $unBlockedResult[$i]['Cognome']?>"></td>
                     <td>
                       <?php
                       //Tramite un'operatore ternario controllo se lo stato di YouTube é 0 o 1 (false o true),
@@ -236,7 +236,7 @@ if (isset($_SESSION["anno"]) && isset($_SESSION["id"])) {
                       echo ($unBlockedResult[$i]['Youtube'] == 1 ?
                       "<img src='Media/green.png' style='margin-left:10px; height:1rem; width:1rem;'/>" : "<img src='Media/red.png' style='margin-left:10px; height:1rem; width:1rem;'/>");
                       ?>
-                      <input type="checkbox" class="checkSblockedYouTube" name="youTubeUnBlocked[]" value="<?php echo $unBlockedResult[$i]['Nome']. "_" . $unBlockedResult[$i]['Cognome']?>">
+                      <input type="checkbox" class="checkSblockedYouTube" name="youTubeUnBlocked[]" value="<?php echo $unBlockedResult[$i]['Nome']. "." . $unBlockedResult[$i]['Cognome']?>">
                     </td>
                     <td><?php echo $unBlockedResult[$i]['Anno_Classe'].$unBlockedResult[$i]['Id_Classe']; ?></td>
                   </tr>

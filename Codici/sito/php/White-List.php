@@ -1,10 +1,7 @@
 <?php
-  session_start();
 
   require('linkGestions.php');
   $classe = new linkGestions();
-  //Richiamo la funzione desiderata passandogli i parametri che necessita.
-  $get = $classe->getData();
 
   //Controllo se é stato eseguito il POST
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,6 +10,8 @@
       $set = $classe->setData($_POST["webSite"]);
     }
   }
+  //Richiamo la funzione desiderata passandogli i parametri che necessita.
+  $get = $classe->getData();
 
 ?>
 <!DOCTYPE html>
