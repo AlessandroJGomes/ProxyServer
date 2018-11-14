@@ -1,0 +1,41 @@
+ -------------------------------------------------------
+|							|
+|			TIPI DI ACL UTILIZZABILE	|
+|							|
+ -------------------------------------------------------
+
+1) src --> Indirizzo IP della sorgente (client)
+
+2) dst --> Indirizzo IP di destinazione (server) o indirizzo IP del server di destinazione
+
+3) srcdomain --> Il nome di dominio sorgente (client)
+
+4) dstdomain --> Il nome di dominio di destinatizione (server)
+
+5) time --> Orario per giorno o giorno della settimana
+
+6) port --> Seleziona e specifica il numero di porta per il server di destinazione (server)
+
+7) myport --> Seleziona e specifica il numero di porta che il client utilizza per connettersi
+
+8) proto --> Protocollo di trasferimento (http, ftp, ecc.)
+
+9) method --> Metodo di richiesta HTTP (get, post, ecc.)
+
+10) ident --> Stringa che si combina con un nome utente
+
+11) ident_regex --> Espressione regolare che identifica uno user name specifico
+
+12) proxy_auth --> Autenticazione degli utenti attraverso un processo esterno
+
+13) arp --> Comparazione con un Ethernet (MAC) addres
+
+###################################################################
+FORMATO DELLE ACL
+
+
+acl nomeacl tipoacl valore 
+acl nomeacl tipoacl "file"
+
+###################################################################
+
