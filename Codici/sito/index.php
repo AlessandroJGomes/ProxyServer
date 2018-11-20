@@ -31,10 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   else {
     if (isset($_POST["studentUnBlocked"])) {
-        $gestions->getCheckboxState($_POST["studentUnBlocked"], $_SESSION["anno"], $_SESSION["id"], $_POST["start"], $_POST["end"], 1, $conn);
+        $gestions->getCheckboxState($_POST["studentUnBlocked"], $_SESSION["anno"], $_SESSION["id"], "", "", 1, $conn);
     }
     if (isset($_POST["youTubeUnBlocked"])) {
-        $gestions->getCheckboxYouTube($_POST["youTubeUnBlocked"], $_SESSION["anno"], $_SESSION["id"], $_POST["start"], $_POST["end"], 1, $conn);
+        $gestions->getCheckboxYouTube($_POST["youTubeUnBlocked"], $_SESSION["anno"], $_SESSION["id"], "", "", 1, $conn);
     }
   }
 }
@@ -180,7 +180,7 @@ if (isset($_SESSION["anno"]) && isset($_SESSION["id"])) {
                         <div class="col-md-6 mb-3">
                           <label for="state">Inizio sblocco</label>
                           <select class="custom-select d-block" name="start">
-                            <option value="" selected>Choose...</option>
+                            <option value="">Choose...</option>
                             <?php echo $time->getTime(); ?>
                           </select>
                         </div>

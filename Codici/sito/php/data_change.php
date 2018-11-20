@@ -17,7 +17,7 @@
 
     /**
     * Questa funzione si occupa della gestione dei checkbox dello stato d'accesso selezionati da parte dell'amministratore.
-    * @param state L'array contenente tutti i nomi ed i cognomi degli allievi selezionati.
+    * @param state L'array contenente tutti i nomi ed i cognomi degli allievi selezionati (nome.cognome).
     * @param year L'anno della classe selezionata.
     * @param id L'identificativo della classe selezionata.
     * @param currentState Lo stato attuale dell'utente (bloccato o sbloccato).
@@ -28,6 +28,12 @@
       $blockState = 0;
       $UnBlockState = 1;
       $resState = array();
+      //Le variabili seguenti vengono utilizzate
+      $interval = "+2 hours";
+      $timeStart = time();
+      $defaultStartTime = date('H:i', $timeStart);
+      $timeEnd = strtotime($interval, $timeStart);
+      $defaultEndTime = date( 'H:i', $timeEnd);
       if ($start == "" && $end == "") {
         //Controllo se l'array contenente i nomi ed i cognomi degli alunni selezionati é vuoto oppure no.
         if(count($state) != 0) {
@@ -40,9 +46,19 @@
               //Eseguo la query che modifica lo stato d'accesso.
               $stmt = $conn->conn->prepare("UPDATE alunni set Stato_Accesso = ? where Nome = ? && Cognome = ?");
               $stmt->bind_param("iss", $UnBlockState, $resState[$i][0],  $resState[$i][1]);
+
+              //Eseguo la query che inserisce l'username, l'orario d'inizio e di fine all'interno della tabella abilitati.
+              $stmt2 = $conn->conn->prepare("INSERT INTO abilitati VALUES(?, ?, ?)");
+              $stmt2->bind_param("sss", $state[$i], $defaultStartTime, $defaultEndTime);
+              $stmt2->execute();
             }else {
               $stmt = $conn->conn->prepare("UPDATE alunni set Stato_Accesso = ? where Nome = ? && Cognome = ?");
               $stmt->bind_param("iss", $blockState, $resState[$i][0],  $resState[$i][1]);
+
+              //Eseguo la query che elimina gli alunni appena bloccati.
+              $stmt2 = $conn->conn->prepare("DELETE FROM abilitati WHERE Username = ?");
+              $stmt2->bind_param("s", $state[$i]);
+              $stmt2->execute();
             }
             if($stmt->execute()) {
               //Richiamo le funzioni che si occupano di stampare a schermo le due tabelle degli alunni bloccati e non.
@@ -55,6 +71,7 @@
         }else {
           echo "Nessun'alunno selezionato";
         }
+        echo "ATTENZIONE, non hai inserito orari d'inizio e fine sblocco";
       }else {
         //Controllo se l'array contenente i nomi ed i cognomi degli alunni selezionati é vuoto oppure no.
         if(count($state) != 0) {
@@ -62,19 +79,30 @@
           for ($i=0; $i < count($state); $i++) {
             $stateId = explode(".", $state[$i]);
             array_push($resState, $stateId);
-            //Controllo lo stato d'accesso ad internet se é bloccato (0) o sbloccato (1).
+            //print_r($state[$i]);
+            //Controllo se lo stato d'accesso ad internet é bloccato (0) o sbloccato (1).
+            //Controllo ridondante per questa funzione che si occupa dei checkbox dello stato d'accesso.
             if($currentState == 0) {
               //Eseguo la query che modifica lo stato d'accesso.
               $stmt = $conn->conn->prepare("UPDATE alunni set Stato_Accesso = ? where Nome = ? && Cognome = ?");
               $stmt->bind_param("iss", $UnBlockState, $resState[$i][0],  $resState[$i][1]);
+              //Eseguo la query che inserisce l'username, l'orario d'inizio e di fine all'interno della tabella abilitati.
+              $stmt2 = $conn->conn->prepare("INSERT INTO abilitati VALUES(?, ?, ?)");
+              $stmt2->bind_param("sss", $state[$i], $start, $end);
+              $stmt2->execute();
             }else {
               $stmt = $conn->conn->prepare("UPDATE alunni set Stato_Accesso = ? where Nome = ? && Cognome = ?");
               $stmt->bind_param("iss", $blockState, $resState[$i][0],  $resState[$i][1]);
+              //Eseguo la query che elimina gli alunni appena bloccati.
+              $stmt2 = $conn->conn->prepare("DELETE FROM abilitati WHERE Username = ?");
+              $stmt2->bind_param("s", $state[$i]);
+              $stmt2->execute();
             }
             if($stmt->execute()) {
               //Richiamo le funzioni che si occupano di stampare a schermo le due tabelle degli alunni bloccati e non.
               $conn->getClassBlocked($year, $id);
               $conn->getClassUnblocked($year, $id);
+              $stmt2->execute();
             }else {
               echo "Query non eseguita";
             }
