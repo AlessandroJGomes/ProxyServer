@@ -19,8 +19,8 @@
     function getData() {
       $getList = array();
       //Preparo il file CSV da aprire in sola lettura.
-      $path = "../CSV/link.csv";
-      $file = fopen($path,"r");
+      $path = "../textFile/link.csv";
+      $file = fopen($path,"r") or die("Impossibile aprire il file:  ".$path);
       //Ciclo tutto il contenuto del file CSV all'interno dell'array che andrò a ritornare.
       while ($data = fgetcsv($file)) {
         array_push($getList, $data);
@@ -39,8 +39,8 @@
     function setData($link) {
       $setList = array();
       //Preparo il file CSV da aprire in sola scrittura.
-      $path = "../CSV/link.csv";
-      $file = fopen($path, "a");
+      $path = "../textFile/link.csv";
+      $file = fopen($path, "a") or die("Impossibile aprire il file:  ".$path);
       if (in_array($link, $this->getData())) {
         echo "GIA PRESENTE";
       }else {
@@ -58,7 +58,7 @@
 
 
 /*
-  $path = "../CSV/link.csv";
+  $path = "../textFile/link.csv";
   $list = array(
     "www.instagram.com, www.tio.ch, www.google.com, www.facebook.com",
   );
